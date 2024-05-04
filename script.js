@@ -3,6 +3,9 @@ const apiUrl = "https://pokeapi.co/api/v2/type/";
 const containerDiv = document.querySelector(".container");
 const pokemonsDiv = document.querySelector(".pokemons");
 const typeSelect = document.querySelector(".type-select");
+const filterBtn = document.querySelector(".filter-btn");
+const pokemonInput = document.querySelector(".search-pokemon");
+const resetBtn = document.querySelector(".reset-btn");
 
 let types = new Set();
 let typesArr = [];
@@ -34,6 +37,9 @@ function getPokemon() {
 }
 
 function createPokemonCard(data, index) {
+    const pokemonDiv = document.createElement("div");
+    pokemonDiv.classList.add("pokemon-div");
+
     const pokemon = document.createElement("div");
     pokemon.classList.add("pokemon");
 
@@ -48,7 +54,7 @@ function createPokemonCard(data, index) {
 
     const pokemonName = document.createElement("p");
     pokemonName.classList.add("name");
-    pokemonName.innerHTML = data.name;
+    pokemonName.innerHTML = data.name.charAt(0).toUpperCase() + data.name.slice(1);
     pokemon.appendChild(pokemonName);
 
     const pokemonType = document.createElement("p");
@@ -56,7 +62,8 @@ function createPokemonCard(data, index) {
     pokemonType.innerHTML = data.types[0].type.name.toUpperCase();
     pokemon.appendChild(pokemonType);
 
-    pokemonsDiv.appendChild(pokemon);
+    pokemonDiv.appendChild(pokemon);
+    pokemonsDiv.appendChild(pokemonDiv);
 
     types.add(data.types[0].type.name);
 }
@@ -69,7 +76,38 @@ function typeOptions() {
 
         typeSelect.append(typeOption);
     })
-    // console.log(typesArr);
+}
+
+function filterByType() {
+    const selectedType = typeSelect.value.toLowerCase();
+    const pokemonCards = document.querySelectorAll('.pokemon-div');
+
+    pokemonCards.forEach((card) => {
+        const cardType = card.querySelector('.type').textContent.toLowerCase();
+        if (selectedType === 'all' || cardType === selectedType) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+function filterByName() {
+    const searchText = pokemonInput.value.trim().toLowerCase();
+    const pokemonCards = document.querySelectorAll('.pokemon-div');
+
+    pokemonCards.forEach((card) => {
+        const cardName = card.querySelector('.name').textContent.toLowerCase();
+        if (cardName.includes(searchText)) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+function pageReload() {
+    location.reload();
 }
 
 getPokemon()
@@ -82,6 +120,19 @@ getPokemon()
     .catch((err) => {
         console.log(err);
     });
+
+filterBtn.addEventListener("click", () => {
+    filterByType();
+});
+
+pokemonInput.addEventListener("input", () => {
+    filterByName();
+});
+
+resetBtn.addEventListener("click", () => {
+    pageReload();
+})
+
 
 // createPokemonCard()
 

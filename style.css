@@ -5,11 +5,12 @@
 }
 
 body {
-    background-image: url("background.jpg");
+    /* background-image: url("background.jpg"); */
     /* background-repeat: no-repeat; */
     background-position: center;
     background-size: cover;
     /* object-fit: fill; */
+    font-family: "Poppins", sans-serif;
 }
 
 .header {
@@ -27,6 +28,9 @@ body {
 .title {
     font-size: 4rem;
     margin: 2rem 0;
+    font-family: "Grandstander", sans-serif;
+    font-weight: 700;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .type-select-div {
@@ -57,11 +61,11 @@ input {
     flex-wrap: wrap;
 }
 
-.pokemon {
-    display: flex;
-    flex-direction: column;
+.pokemon-div {
+    /* display: flex;
+    flex-direction: column; */
     /* flex-wrap: wrap; */
-    align-items: center;
+    /* align-items: center; */
     margin: 2rem;
     background-color: aliceblue;
     width: 20%;
@@ -70,10 +74,22 @@ input {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
+.pokemon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .number {
     background-color: brown;
     width: 100%;
     text-align: center;
+    /* height: 2rem; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    /* border-radius: 1rem; */
 }
 
 .type {
