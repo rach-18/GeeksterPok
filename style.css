@@ -32,6 +32,7 @@ body {
     font-family: "Grandstander", sans-serif;
     font-weight: 700;
     text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    color: antiquewhite;
 }
 
 .type-select-div {
@@ -55,6 +56,10 @@ input {
     padding: 1rem 2rem;
     width: 100%;
     border-radius: 2rem;
+    background-color: #1D2735;
+    color: #A6ADBA;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .pokemons {
@@ -98,4 +103,24 @@ input {
     background-color: aquamarine;
     padding: 0.5rem;
     border-radius: 2rem;
+}
+
+select, button {
+    background-color: #1D2735;
+    border: none;
+    color: #A6ADBA;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    /* border: 1px solid #1D2735; */
+    /* color: #1D2735; */
+    /* font-size: 1rem; */
+}
+
+button {
+    transition: all 200ms;
+}
+
+button:hover {
+    background-color: #A6ADBA;
+    color: #1D2735;
 }
