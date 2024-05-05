@@ -39,12 +39,14 @@ function getPokemon() {
 function createPokemonCard(data, index) {
     const pokemonDiv = document.createElement("div");
     pokemonDiv.classList.add("pokemon-div");
+    pokemonDiv.style.background = `rgba(${chooseColor(data.types[0].type.name, "bg")}, 0.6)`;
 
     const pokemon = document.createElement("div");
     pokemon.classList.add("pokemon");
 
     const pokemonNum = document.createElement("p");
     pokemonNum.classList.add("number");
+    pokemonNum.style.background = chooseColor(data.types[0].type.name)
     pokemonNum.innerHTML = "#" + index;
     pokemon.appendChild(pokemonNum);
 
@@ -60,12 +62,136 @@ function createPokemonCard(data, index) {
     const pokemonType = document.createElement("p");
     pokemonType.classList.add("type");
     pokemonType.innerHTML = data.types[0].type.name.toUpperCase();
+    pokemonType.style.background = chooseColor(data.types[0].type.name);
     pokemon.appendChild(pokemonType);
 
     pokemonDiv.appendChild(pokemon);
     pokemonsDiv.appendChild(pokemonDiv);
 
     types.add(data.types[0].type.name);
+}
+
+function chooseColor(type, category = "") {
+    if(type === "grass") {
+        if(category === "bg") {
+            return "65, 176, 110";
+        }
+        else {
+            return "#1A4D2E";
+        }
+    }
+    else if(type === "fire") {
+        if(category === "bg") {
+            return "221, 87, 70";
+        }
+        else {
+            return "#820300";
+        }
+    }
+    else if(type === "water") {
+        if(category === "bg") {
+            return "160, 222, 255";
+        }
+        else {
+            return "#153448"
+        }
+    }
+    else if(type === "bug") {
+        if(category === "bg") {
+            return "135, 169, 34";
+        }
+        else {
+            return "#114232";
+        }
+    }
+    else if(type === "normal") {
+        if(category === "bg") {
+            return "255, 255, 255";
+        }
+        else {
+            return "#E72929";
+        }
+    }
+    else if(type === "poison") {
+        if(category === "bg") {
+            return "67, 104, 80";
+        }
+        else {
+            return "#12372A";
+        }
+    }
+    else if(type === "electric") {
+        if(category === "bg") {
+            return "255, 193, 0";
+        }
+        else {
+            return "#FF6500";
+        }
+    }
+    else if(type === "ground") {
+        if(category === "bg") {
+            return "236, 177, 89";
+        }
+        else {
+            return "#803D3B";
+        }
+    }
+    else if(type === "fairy") {
+        if(category === "bg") {
+            return "255, 243, 199"
+        }
+        else {
+            return "#F4538A";
+        }
+    }
+    else if(type === "fighting") {
+        if(category === "bg") {
+            return "63, 109, 156";
+        }
+        else {
+            return "#E14D2A";
+        }
+    }
+    else if(type === "psychic") {
+        if(category === "bg") {
+            return "112, 66, 100";
+        }
+        else {
+            return "#32012F";
+        }
+    }
+    else if(type === "rock") {
+        if(category === "bg") {
+            return "116, 114, 100";
+        }
+        else {
+            return "#3C3633";
+        }
+    }
+    else if(type === "ghost") {
+        if(category === "bg") {
+            return "92, 131, 116";
+        }
+        else {
+            return "#0C0C0C";
+        }
+    }
+    else if(type === "ice") {
+        if(category === "bg") {
+            return "238, 247, 255";
+        }
+        else {
+            return "#5AB2FF";
+        }
+    }
+    else if(type === "dragon") {
+        if(category === "bg") {
+            return "155, 57, 34";
+        }
+        else {
+            return "#481E14";
+        }
+    }
 }
 
 function typeOptions() {
