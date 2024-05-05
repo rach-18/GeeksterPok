@@ -39,14 +39,16 @@ function getPokemon() {
 function createPokemonCard(data, index) {
     const pokemonDiv = document.createElement("div");
     pokemonDiv.classList.add("pokemon-div");
+    pokemonDiv.classList.add("flip-card-inner"); // Add flip-card-inner class to the pokemon-div
     pokemonDiv.style.background = `rgba(${chooseColor(data.types[0].type.name, "bg")}, 0.6)`;
 
+    // Remove the separate inner div and append elements directly to pokemonDiv
     const pokemon = document.createElement("div");
     pokemon.classList.add("pokemon");
 
     const pokemonNum = document.createElement("p");
     pokemonNum.classList.add("number");
-    pokemonNum.style.background = chooseColor(data.types[0].type.name)
+    pokemonNum.style.background = chooseColor(data.types[0].type.name);
     pokemonNum.innerHTML = "#" + index;
     pokemon.appendChild(pokemonNum);
 
@@ -65,11 +67,58 @@ function createPokemonCard(data, index) {
     pokemonType.style.background = chooseColor(data.types[0].type.name);
     pokemon.appendChild(pokemonType);
 
+    const filpCardBack = document.createElement("div");
+    filpCardBack.classList.add("flip-card-back");
+    // Append content directly to pokemonDiv
+    // filpCardBack.innerHTML = "<p>This is the back side</p>";
+    // filpCardBack.appendChild(pokemonImg);
+
+    const backCardNum = document.createElement("p");
+    backCardNum.classList.add("number");
+    backCardNum.style.background = chooseColor(data.types[0].type.name);
+    backCardNum.innerHTML = "#" + index;
+    filpCardBack.appendChild(backCardNum);
+
+    const backCardImg = document.createElement("img");
+    backCardImg.src = data.sprites.front_default;
+    filpCardBack.appendChild(backCardImg);
+
+    const backCardName = document.createElement("p");
+    backCardName.classList.add("name");
+    backCardName.innerHTML = data.name.charAt(0).toUpperCase() + data.name.slice(1);
+    filpCardBack.appendChild(backCardName);
+
+    const backCardAbilities = document.createElement("p");
+    let abilityOutput = "Abilities: ";
+    // console.log(data.abilities);
+    data.abilities.forEach((ability, index) => {
+        // console.log(ability.ability.name);
+        if(index < (data.abilities.length - 1)) {
+            abilityOutput += ability.ability.name + ", ";
+        }
+        else {
+            abilityOutput += ability.ability.name;
+        }
+    })
+    // data.abilities.forEach((index, ability) => {
+    //     // console.log(ability.ability.name);
+    //     if(index == (data.abilities.length - 1)) {
+    //         abilityOutput += ability + ", ";
+    //     }
+    //     else {
+    //         abilityOutput += ability;
+    //     }
+    // })
+    backCardAbilities.innerHTML = abilityOutput;
+    filpCardBack.appendChild(backCardAbilities);
+
     pokemonDiv.appendChild(pokemon);
+    pokemonDiv.appendChild(filpCardBack); // Append the flip card back directly to pokemonDiv
     pokemonsDiv.appendChild(pokemonDiv);
 
     types.add(data.types[0].type.name);
 }
+
 
 function chooseColor(type, category = "") {
     if(type === "grass") {
@@ -259,6 +308,13 @@ resetBtn.addEventListener("click", () => {
     pageReload();
 })
 
+const logResponse = callApi("https://pokeapi.co/api/v2/pokemon/1");
+
+// logResponse.then((data) => {
+//     data.abilities.forEach((ability, index) => {
+//         console.log(index, ability.ability.name);
+//     })
+// })
 
 // createPokemonCard()
 
